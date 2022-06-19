@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="{% static 'PatientManager/dashboard.css' %}" />
+<body>
+    <header>Your Prescription Images</header>
+    <div id="Info">
+        {% for usr in oneusr %}
+            <p>Patient Name :- {{usr.Patient_name}}</p>
+            <p>Patient Email:- {{usr.Patient_email}}</p>  
+        {% endfor %}
+    </div>
+    <form action="addPrescription" style="border: 1px solid #ccc" method="post">
+    {% csrf_token %}
+    <label for="imageadd">Add Prescription Image</label>
+    <br>
+    <input type="file" name="picture" id="picture" />
+    <button type="submit">Submit</button></form>
+    <a href="/dash/logintemp">
+    <button class="Sign">Go To Signin page</button></a>
+    <div class="imageContainer">
+        {% for image in PrescriptionImg %}
+            <img src="/media/{{image.Prescrip_Photo}}" alt="" height="auto" width="auto">
+        {% endfor %}
+    </div>
+</body>
+</html>
